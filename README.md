@@ -1,4 +1,4 @@
-#  Acervo: CRUD Básico com SQLite e Python
+#  Básico com SQLite e Python
 
 Este projeto é um exercício prático que demonstra os comandos fundamentais de SQL (CRUD - Create, Read, Update, Delete) utilizando a biblioteca nativa `sqlite3` do Python.
 
@@ -520,46 +520,213 @@ As transações simultâneas devem ser executadas de forma independente e isolad
 Significado: O resultado da execução de várias transações ao mesmo tempo deve ser o mesmo que se elas tivessem sido executadas sequencialmente (uma após a outra). Nenhuma transação pode "ver" os resultados parciais de outra transação em andamento.
 
 Crucialidade: Evita problemas de concorrência (lost updates, leituras sujas, leituras não repetíveis) que poderiam levar a resultados incorretos em ambientes multiusuário.
+🗂️ Básico com SQLite e Python
 
-4. Durabilidade (D - Durability)
-Uma vez que a transação é confirmada (commitada), suas alterações são permanentes no sistema.
+Este projeto é um exercício prático que demonstra os comandos fundamentais de SQL (CRUD – Create, Read, Update, Delete) utilizando a biblioteca nativa sqlite3 do Python.
 
-Significado: As alterações são registradas em um armazenamento não volátil (disco rígido ou SSD) e persistem mesmo que ocorra uma falha no sistema (como queda de energia ou falha de hardware) logo após o commit.
+🧩 Parte 1: Explicação do Código
+📝 Descrição Geral do que Foi Implementado
 
-Crucialidade: Garante a confiança no sistema. O banco de dados deve ser capaz de recuperar o estado da transação por meio de logs de transação quando o sistema for reiniciado.
+O script acervo_sqlite.py implementa um sistema simples de gerenciamento de acervo (livros e usuários), abrangendo:
 
-Fonte: https://learn.microsoft.com/pt-br/windows/win32/cossdk/acid-properties
+Criação de Tabelas: Livros e Usuario.
 
-4-O que estabelece o Princípio do Privilégio Mínimo em segurança de
-bancos de dados? (Conceito de menor privilégio e suas aplicações)
+Manipulação de Dados: Inserção de registros (INSERT), atualização de informações (UPDATE) e exclusão de registros por condição (DELETE).
 
-R.: O Princípio do Privilégio Mínimo (Principle of Least Privilege - PoLP), em segurança de bancos de dados, estabelece que a um usuário, processo, ou aplicação deve ser concedido apenas o nível de acesso e as permissões estritamente necessárias para executar suas funções e nada mais.
+Consulta de Dados: Seleção de registros filtrados (SELECT WHERE) e ordenados (SELECT ORDER BY).
 
-É um conceito fundamental de segurança que visa minimizar a superfície de ataque e limitar os danos potenciais causados por falhas, erros ou atores mal-intencionados.
+Estrutura do Código: Uso de funções independentes para cada operação, garantindo modularidade e segurança contra injeção de SQL.
+
+⚙️ Como Executar o Projeto
+
+Clone o repositório:
+
+git clone https://github.com/Evelynsilva07/Projeto-SQL.git
+cd Acervo
 
 
-* Conceito e Aplicações
-O PoLP não significa nenhum privilégio, mas sim o menor privilégio necessário.
+Crie e ative o ambiente virtual (Windows):
 
-1. Conceito Central
-Controle Rigoroso: Define que todas as entidades (usuários, aplicações web, microserviços, stored procedures) devem operar com as permissões mínimas funcionais.
+python -m venv venv
+venv\Scripts\activate
 
-Foco: Se um usuário só precisa ler dados de uma tabela específica, ele não deve ter permissão para escrever, atualizar ou apagar dados dessa ou de qualquer outra tabela.
 
-2. Aplicações Cruciais em Bancos de Dados
-A aplicação do PoLP é vital para a segurança e integridade do SGBD:
+Instale as dependências (opcional):
 
-Contas de Aplicação (Backend): O servidor back-end (onde reside a lógica de negócios) não deve se conectar ao banco de dados usando a conta de administrador (root ou sa). Deve usar uma conta dedicada que só tenha permissões SELECT, INSERT, UPDATE e DELETE nas tabelas que o aplicativo realmente usa.
+pip install -r requirements.txt
 
-Usuários Finais e Clientes: Um cliente em um site de e-commerce deve ter permissão apenas para ver seus próprios pedidos e informações pessoais. Ele não deve conseguir ver os dados de outros clientes ou acessar tabelas de inventário e preços de forma irrestrita.
 
-Administração: Mesmo os administradores (DBAs) devem usar contas com privilégios elevados (SUPERUSER) apenas quando estritamente necessário para tarefas de manutenção. Para operações diárias e consultas, devem usar contas com privilégios reduzidos.
+Execute o script:
 
-3. Impacto na Segurança
-A implementação correta do PoLP mitiga os riscos de segurança de várias maneiras:
+python acervo.db
 
-Limita o Dano: Se uma aplicação for comprometida (ex: ataque de injeção SQL), o invasor só poderá atuar dentro das permissões limitadas dessa conta. Ele não conseguirá apagar todo o banco de dados ou comprometer dados não relacionados.
+📘 Estrutura das Tabelas Criadas
 
-Reduz Erros: Impede que um erro humano (acidentalmente executando um DELETE sem a cláusula WHERE) cause uma catástrofe sistêmica, pois a conta pode não ter permissão para apagar a tabela inteira.
+Tabela Livros:
 
-Fonte: https://www.datacamp.com/pt/tutorial/principle-of-least-privilege
+id: Identificador único do livro (INTEGER, chave primária, auto incremento).
+
+titulo: Título do livro (TEXT, NOT NULL, UNIQUE).
+
+autor: Nome do autor (TEXT).
+
+ano: Ano de publicação (INTEGER).
+
+genero: Gênero do livro (TEXT).
+
+disponivel: Indica se o livro está disponível (1 = Sim, 0 = Não).
+
+Tabela Usuario:
+
+id: Identificador único do usuário (INTEGER, chave primária, auto incremento).
+
+nome: Nome completo do usuário (TEXT).
+
+idade: Idade do usuário (INTEGER, adicionada via ALTER TABLE).
+
+🧠 Parte 2: Questões Respondidas
+🏛️ Fundamentos de Bancos de Dados
+
+1. Por que os bancos de dados são essenciais em aplicações modernas?
+Os bancos de dados são a base de qualquer sistema moderno, funcionando como uma memória central organizada que armazena e gerencia dados de forma segura e eficiente.
+Eles garantem organização, integridade, segurança, acesso simultâneo, suporte à tomada de decisão e escalabilidade.
+
+📚 Fonte: Oracle - What is a Database?
+
+2. Quais são as principais categorias de bancos de dados existentes?
+Existem duas categorias principais:
+
+Relacionais (SQL): organizam dados em tabelas, com estrutura rígida e relações definidas.
+Priorizam integridade (modelo ACID).
+Exemplos: MySQL, PostgreSQL, Oracle, SQL Server.
+
+Não Relacionais (NoSQL): armazenam dados de forma flexível (documentos, chave-valor, grafos, colunas).
+Focam em escalabilidade e disponibilidade (modelo BASE).
+Exemplos: MongoDB, Redis, Cassandra, Neo4j.
+
+📚 Fonte: Banco de Dados Relacional ou Não-relacional | SQL vs NoSQL (YouTube)
+
+3. Em quais cenários é recomendado utilizar um banco relacional?
+É indicado para sistemas que exigem alta consistência e integridade dos dados, como:
+
+Transações financeiras e contábeis.
+
+Sistemas empresariais (ERP, CRM).
+
+Aplicações com relacionamentos complexos entre entidades.
+
+Situações em que a precisão é mais importante que a velocidade de escrita.
+
+📚 Fonte: AWS - Bancos de Dados SQL e NoSQL
+
+4. De que forma o hardware (CPU, memória e disco) afeta o desempenho de um banco de dados?
+
+CPU: processa consultas — quanto mais forte, melhor o desempenho.
+
+Memória (RAM): armazena dados temporários — se insuficiente, o sistema acessa o disco e fica lento.
+
+Disco: se for lento (HDD), causa gargalos; SSDs são mais eficientes para bancos de dados intensivos.
+
+📚 Fonte: Google Cloud - Otimização de MySQL
+
+5. O que significa escalabilidade em bancos de dados?
+Escalabilidade é a capacidade de o banco crescer junto com a demanda:
+
+Vertical (Scale-Up): aumentar a capacidade do servidor (mais CPU, RAM).
+
+Horizontal (Scale-Out): adicionar mais servidores e distribuir a carga.
+
+📚 Fonte: Escalabilidade Vertical e Horizontal (YouTube)
+
+6. Qual a importância da normalização em bancos de dados relacionais?
+A normalização organiza os dados de forma estruturada, evitando redundância e inconsistência.
+Ela melhora o desempenho das consultas, garante integridade e facilita a manutenção do sistema.
+
+📚 Fonte: DataCamp - Normalization in SQL
+
+7. Como escolher entre SQL e NoSQL para um novo projeto?
+
+SQL: ideal quando há necessidade de integridade, consistência e estrutura definida (ex: bancos, ERPs, CRMs).
+
+NoSQL: ideal para sistemas dinâmicos, de grande escala e alta disponibilidade (ex: redes sociais, e-commerce, Big Data).
+
+📚 Fonte: Microsoft Learn - Data Storage Options
+
+💾 Comandos SQL
+
+1. Qual é a finalidade do comando SELECT?
+Permite consultar e visualizar dados armazenados no banco, selecionando colunas específicas ou todas (SELECT *).
+É o comando mais usado para recuperação de informações.
+
+📚 Fonte: W3Schools - SQL SELECT
+
+2. O que significam DML e DDL?
+
+DML (Data Manipulation Language): gerencia dados (SELECT, INSERT, UPDATE, DELETE).
+
+DDL (Data Definition Language): define a estrutura do banco (CREATE, ALTER, DROP, TRUNCATE).
+
+📚 Fontes:
+
+IBM - DML
+
+IBM - DDL
+
+3. Para que serve a cláusula WHERE?
+Filtra registros de acordo com uma condição específica.
+Pode ser usada com SELECT, UPDATE e DELETE.
+
+📚 Fonte: Microsoft - Access SQL WHERE Clause
+
+4. Por que é importante estabelecer uma PRIMARY KEY?
+A chave primária identifica unicamente cada registro de uma tabela, garantindo integridade e relacionamentos consistentes.
+
+📚 Fonte: Microsoft - Primary and Foreign Key Constraints
+
+5. Como funciona o comando UPDATE?
+Altera os valores de colunas em registros existentes.
+Sem a cláusula WHERE, o comando modifica todos os registros da tabela.
+
+📚 Fonte: W3Schools - SQL UPDATE
+
+6. Qual é a função do comando DELETE e sua diferença para DROP?
+
+DELETE: remove linhas específicas da tabela.
+
+DROP: apaga completamente a tabela e sua estrutura.
+
+📚 Fonte: W3Schools - SQL DELETE
+
+7. Como funciona a cláusula ORDER BY?
+Organiza os resultados da consulta em ordem crescente (ASC) ou decrescente (DESC).
+
+📚 Fonte: DataCamp - SQL ORDER BY
+
+8. Para que serve o comando LIMIT?
+Restringe a quantidade de registros retornados por uma consulta, sendo útil para paginação ou otimização.
+
+📚 Fonte: MySQL Documentation - SELECT Statement
+
+🌐 Outros Conceitos
+
+1. Por que é importante integrar o banco de dados com o back-end da aplicação?
+Porque o back-end atua como intermediário entre o usuário e o banco, garantindo segurança, validação, lógica de negócios e controle de acesso.
+
+📚 Fonte: DataCamp - O que é Back-End? Guia Completo
+
+2. O que são Views (Visões) e quais suas vantagens?
+Uma View é uma tabela virtual criada a partir de uma consulta SQL.
+Ela simplifica consultas complexas, melhora a segurança (limitando acesso a colunas) e garante consistência de dados.
+
+📚 Fonte: UnB - Visões em Banco de Dados
+
+3. Quais são as propriedades ACID e por que são cruciais?
+As propriedades Atomicidade, Consistência, Isolamento e Durabilidade garantem que as transações ocorram de forma segura e íntegra, mesmo em caso de falhas.
+
+📚 Fonte: Microsoft - ACID Properties
+
+4. O que estabelece o Princípio do Privilégio Mínimo?
+Esse princípio define que usuários e aplicações devem ter apenas as permissões necessárias para realizar suas funções.
+Isso reduz riscos de ataques e erros, garantindo segurança e controle sobre os dados.
+
+📚 Fonte: OWASP - Principle of Least Privilege

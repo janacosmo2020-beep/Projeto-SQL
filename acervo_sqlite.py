@@ -60,11 +60,11 @@ def inserir_5_livros(conn):
     conn.commit()
     
     livros_ficticios = [
-        ("O Encontro Marcado", "Fernando Sabino", 1956, "Romance", 1),
-        ("O Diário de Zlata: a Vida de Uma Menina na Guerra", "Zlata Filipovic", 1993, "Relato Pessoal", 1),
-        ("A Droga da Obediência", "Pedro Bandeira", 1984, "Ficção", 1),
-        ("Memórias póstumas de Brás Cubas", "Machado de Assis", 1881, "Romance", 0),
-        ("O Motorista e o Milionário", "Joachim de Posada", 2007, "Investigativo e educativo sobre finanças e comportamento econômico", 1)
+        ("Pequeno Princepe", "Antoine de Saint-Exupéry", 1943, "Romance", 1),
+        ("O Motorista e o Milionário", "Joachim de Posada", 2007, "Relato Pessoal", 1),
+        ("Dom Quixote de la Mancha", "Miguel de Cervantes", 1605, "Ficção", 1),
+        ("O Senhor dos Anéis", "J. R. R. Tolkien", "Ficção", 0),
+        ("A Bíblia Sagrada", "Vários autores", 1000, "Investigativo e educativo sobre vida e comportamento em geral", 1)
     ]
     
     sucesso = True
@@ -282,11 +282,11 @@ def inserir_5_usuarios(conn):
     conn.commit()
     
     usuarios_ficticios = [
-        ("Evelyn", 37),
-        ("Juan", 9),
-        ("Rildo", 36),
-        ("Erick", 27),
-        ("Naila", 59)
+        ("Rafael", 30),
+        ("ELIANA", 40),
+        ("Cassiana", 36),
+        ("Marilia", 45),
+        ("Pedro", 20)
     ]
     
     sucesso = True

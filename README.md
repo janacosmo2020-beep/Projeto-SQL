@@ -1,4 +1,4 @@
-# 📚 Acervo: CRUD Básico com SQLite e Python
+#  Acervo: CRUD Básico com SQLite e Python
 
 Este projeto é um exercício prático que demonstra os comandos fundamentais de SQL (CRUD - Create, Read, Update, Delete) utilizando a biblioteca nativa `sqlite3` do Python.
 
@@ -189,22 +189,22 @@ A normalização envolve aplicar um conjunto de regras (Formas Normais, como 1NF
 
 Os principais benefícios dessa estruturação correta são:
 
-1. 🚫 Redução da Redundância de Dados (Duplicação)
+1.  Redução da Redundância de Dados (Duplicação)
 Relevância: A redundância (dados repetidos em vários locais) desperdiça espaço de armazenamento e é a principal causa de inconsistência. Ao normalizar, cada fato é armazenado em um único local.
 
 Exemplo: O nome de um cliente deve ser armazenado apenas na tabela Clientes, e não repetido em todas as linhas da tabela Pedidos dele.
 
-2. ✅ Melhoria na Integridade e Consistência dos Dados
+2.  Melhoria na Integridade e Consistência dos Dados
 Relevância: A integridade garante que os dados sejam precisos e confiáveis. Sem normalização, se a informação de um cliente (ex: seu endereço) precisar ser atualizada, seria necessário alterá-la em todos os lugares onde ela aparece. Se uma atualização for esquecida, o banco de dados se torna inconsistente.
 
 Normalização: Garante que a atualização seja feita em um único lugar, refletindo-se automaticamente em todas as relações. Isso evita as chamadas anomalias de atualização, inserção e exclusão.
 
-3. 🚀 Otimização da Performance de Consultas e Operações
+3.  Otimização da Performance de Consultas e Operações
 Relevância: Tabelas menores, focadas em um único tipo de entidade, são mais rápidas de serem pesquisadas e manipuladas.
 
 Benefício: Consultas se tornam mais eficientes (embora às vezes exijam mais JOINs), pois o Sistema Gerenciador de Banco de Dados (SGBD) precisa processar menos dados irrelevantes em cada tabela. Além disso, operações de escrita (INSERT, UPDATE, DELETE) são mais rápidas, pois afetam menos registros.
 
-4. 📝 Simplificação da Manutenção e Flexibilidade
+4.  Simplificação da Manutenção e Flexibilidade
 Relevância: Um esquema bem estruturado e normalizado é mais fácil para os desenvolvedores entenderem e manterem ao longo do tempo.
 
 Benefício: Se um novo requisito surgir (ex: adicionar um campo de telefone alternativo ao cliente), a mudança é aplicada em apenas uma tabela (Clientes), sem afetar inúmeras outras tabelas.
@@ -310,7 +310,7 @@ Quando usada com SELECT, a cláusula WHERE limita o número de linhas na saída 
 
 A cláusula WHERE em consultas SQL serve para filtrar os registros (linhas) que serão retornados pela consulta. Seu papel é estabelecer uma condição lógica que cada linha do banco de dados deve satisfazer para ser incluída no resultado final.
 
-🎯 Papel da Cláusula WHERE
+ Papel da Cláusula WHERE
 O WHERE é usado em conjunto com comandos DML, principalmente o SELECT, mas também pode ser aplicado em UPDATE e DELETE.
 
 1. Filtragem de Registros (SELECT)
@@ -321,7 +321,7 @@ Quando usada com UPDATE ou DELETE, a cláusula WHERE define quais registros ter�
 
 A cláusula WHERE em consultas SQL serve para filtrar os registros (linhas) que serão retornados pela consulta. Seu papel é estabelecer uma condição lógica que cada linha do banco de dados deve satisfazer para ser incluída no resultado final.
 
-🎯 Papel da Cláusula WHERE
+ Papel da Cláusula WHERE
 O WHERE é usado em conjunto com comandos DML, principalmente o SELECT, mas também pode ser aplicado em UPDATE e DELETE.
 
 1. Filtragem de Registros (SELECT)
@@ -380,7 +380,7 @@ R.: A cláusula ORDER BY em consultas SQL organiza os resultados de uma consulta
 
 Você pode especificar a direção da ordenação usando duas palavras-chave:
 
-1. Ascendente (ASC) ⬆️
+1. Ascendente (ASC) 
 Função: Ordena os dados do menor para o maior (do início para o fim).
 
 Padrão: É a ordem padrão se nenhuma palavra-chave for especificada.
@@ -393,7 +393,7 @@ Texto: A, B, C...
 
 Datas: Data mais antiga para a data mais recente.
 
-2. Descendente (DESC) ⬇️
+2. Descendente (DESC) ⬇
 Função: Ordena os dados do maior para o menor (do fim para o início).
 
 Exemplos:
@@ -440,22 +440,22 @@ Essa integração é o que permite que uma aplicação moderna armazene, recuper
 * A Relação Essencial entre Back-end e Banco de Dados
 A camada de back-end é responsável por gerenciar todo o ciclo de vida dos dados, cumprindo as seguintes funções críticas:
 
-1. 🤝 Comunicação e Tradução
+1.  Comunicação e Tradução
 O back-end utiliza drivers e conectores para estabelecer e gerenciar a conexão com o banco de dados. Ele traduz as requisições complexas vindas do front-end (como um clique no botão "Comprar") em comandos SQL ou NoSQL que o BD pode entender e executar (SELECT, INSERT, UPDATE, DELETE).
 
-2. 🛡️ Imposição da Lógica de Negócios
+2.  Imposição da Lógica de Negócios
 O back-end é o local onde a lógica de negócios (as regras de como a empresa funciona) é aplicada antes que os dados cheguem ao BD ou sejam exibidos ao usuário.
 
 Exemplo: Antes de registrar uma compra no BD, o back-end verifica se o estoque está disponível e calcula os impostos, garantindo que apenas dados válidos e processados sejam armazenados.
 
-3. 🔒 Segurança e Autorização
+3.  Segurança e Autorização
 É no back-end que ocorre a validação da identidade e das permissões do usuário.
 
 Ele impede que o usuário final acesse o banco de dados diretamente, agindo como um portão de segurança.
 
 Ele garante que usuários mal-intencionados não possam executar comandos SQL maliciosos ou ter acesso a dados confidenciais (como senhas), que devem ser criptografados no servidor antes de serem armazenados.
 
-4. 📈 Gerenciamento de Conexões e Performance
+4.  Gerenciamento de Conexões e Performance
 O servidor back-end é responsável por gerenciar de forma eficiente o pool de conexões com o BD, garantindo que múltiplas requisições de usuários simultâneos sejam tratadas sem sobrecarregar o banco de dados ou a aplicação. Isso é crucial para a escalabilidade e o desempenho do sistema.
 
 Fonte: ttps://www.datacamp.com/pt_BR/blog/o-que-e-back-end-guia-completo
@@ -470,7 +470,7 @@ Quando você consulta uma View, o banco de dados executa a consulta SELECT subja
 * Vantagens e Utilidade das Views
 A criação e utilização de Views oferecem vantagens significativas para o gerenciamento, segurança e simplificação de um banco de dados:
 
-1. 🛡️ Segurança e Restrição de Acesso (Controle de Dados)
+1.  Segurança e Restrição de Acesso (Controle de Dados)
 Views permitem implementar uma camada de segurança fina. Você pode conceder a usuários acesso a uma View que exibe apenas um subconjunto de colunas ou linhas de uma tabela sensível.
 
 Exemplo: Um atendente pode ter acesso a uma View que mostra apenas o nome do cliente e o ID do pedido, mas não a colunas confidenciais da tabela original, como o salário ou o número do cartão de crédito.
@@ -480,12 +480,12 @@ Views permitem encapsular lógica de negócios complexa ou consultas que envolve
 
 Utilidade: Em vez de reescrever uma query longa e complexa várias vezes, os desenvolvedores e usuários consultam a View com um SELECT * FROM nome_da_view, simplificando drasticamente o código e reduzindo erros.
 
-3. 🧩 Consistência e Reutilização
+3.  Consistência e Reutilização
 Ao centralizar a lógica de um cálculo ou um conjunto de regras de filtragem na View, você garante que todos os usuários estejam consultando os mesmos dados e aplicando a mesma lógica.
 
 Exemplo: Uma View pode ser criada para calcular o "Valor Total do Pedido" (Preço * Quantidade - Desconto), e essa definição será consistente em todas as partes da aplicação que a utilizarem.
 
-4. 🎚️ Camada de Abstração e Estabilidade
+4.  Camada de Abstração e Estabilidade
 As Views podem fornecer uma interface estável para aplicações, mesmo que o esquema subjacente da tabela (o nome de uma coluna, por exemplo) precise mudar.
 
 Utilidade: Se você renomear uma coluna na tabela base, você só precisará atualizar a definição da View; a aplicação que consulta a View não precisará de alterações.
